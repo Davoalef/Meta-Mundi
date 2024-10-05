@@ -1,50 +1,312 @@
 ---
-import BaseHead from '../components/BaseHead.astro';
-import Header from '../components/Header.astro';
-import Footer from '../components/Footer.astro';
-import { SITE_TITLE, SITE_DESCRIPTION } from '../consts';
+const SITE_TITLE = "Energía Solar Sostenible";
+const SITE_DESCRIPTION = "Soluciones de paneles solares para un futuro más verde y eficiente.";
 ---
 
-<!doctype html>
-<html lang="en">
-	<head>
-		<BaseHead title={SITE_TITLE} description={SITE_DESCRIPTION} />
-	</head>
-	<body>
-		<Header />
-		<main>
-			<h1>🧑‍🚀 Hello, Astronaut!</h1>
-			<p>
-				Welcome to the official <a href="https://astro.build/">Astro</a> blog starter template. This
-				template serves as a lightweight, minimally-styled starting point for anyone looking to build
-				a personal website, blog, or portfolio with Astro.
-			</p>
-			<p>
-				This template comes with a few integrations already configured in your
-				<code>astro.config.mjs</code> file. You can customize your setup with
-				<a href="https://astro.build/integrations">Astro Integrations</a> to add tools like Tailwind,
-				React, or Vue to your project.
-			</p>
-			<p>Here are a few ideas on how to get started with the template:</p>
-			<ul>
-				<li>Edit this page in <code>src/pages/index.astro</code></li>
-				<li>Edit the site header items in <code>src/components/Header.astro</code></li>
-				<li>Add your name to the footer in <code>src/components/Footer.astro</code></li>
-				<li>Check out the included blog posts in <code>src/content/blog/</code></li>
-				<li>Customize the blog post page layout in <code>src/layouts/BlogPost.astro</code></li>
-			</ul>
-			<p>
-				Have fun! If you get stuck, remember to <a href="https://docs.astro.build/"
-					>read the docs
-				</a> or <a href="https://astro.build/chat">join us on Discord</a> to ask questions.
-			</p>
-			<p>
-				Looking for a blog template with a bit more personality? Check out <a
-					href="https://github.com/Charca/astro-blog-template"
-					>astro-blog-template
-				</a> by <a href="https://twitter.com/Charca">Maxi Ferreira</a>.
-			</p>
-		</main>
-		<Footer />
-	</body>
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>{SITE_TITLE}</title>
+  <meta name="description" content={SITE_DESCRIPTION} />
+  <style>
+    /* Reset básico */
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    /* Variables de color */
+    :root {
+      --color-primary: #ff7e5f;
+      --color-secondary: #feb47b;
+      --color-accent: #4b6cb7;
+      --color-light: #f0f4f8;
+      --color-dark: #333333;
+      --font-primary: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    }
+
+    body {
+      font-family: var(--font-primary);
+      background-color: var(--color-light);
+      color: var(--color-dark);
+      line-height: 1.6;
+    }
+
+    a {
+      color: var(--color-primary);
+      text-decoration: none;
+    }
+
+    a:hover {
+      color: var(--color-secondary);
+    }
+
+    header {
+      background: linear-gradient(135deg, var(--color-primary), var(--color-secondary));
+      color: #fff;
+      padding: 20px 0;
+      position: sticky;
+      top: 0;
+      z-index: 1000;
+    }
+
+    .container {
+      width: 90%;
+      max-width: 1200px;
+      margin: 0 auto;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      flex-wrap: wrap;
+    }
+
+    .logo {
+      font-size: 1.5rem;
+      font-weight: bold;
+    }
+
+    nav ul {
+      list-style: none;
+      display: flex;
+      gap: 20px;
+      flex-wrap: wrap;
+    }
+
+    nav ul li {
+      margin: 0;
+    }
+
+    main {
+      padding: 60px 0;
+      background-color: #fff;
+    }
+
+    .hero {
+      background: url('https://via.placeholder.com/1200x600') center/cover no-repeat;
+      height: 60vh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: #fff;
+      text-align: center;
+      position: relative;
+    }
+
+    .hero::after {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background-color: rgba(0, 0, 0, 0.5);
+    }
+
+    .hero-content {
+      position: relative;
+      z-index: 1;
+    }
+
+    .hero h1 {
+      font-size: 3rem;
+      margin-bottom: 20px;
+    }
+
+    .hero p {
+      font-size: 1.2rem;
+      max-width: 600px;
+      margin: 0 auto 30px;
+    }
+
+    .btn-primary {
+      background-color: var(--color-accent);
+      color: #fff;
+      padding: 10px 20px;
+      border: none;
+      border-radius: 25px;
+      cursor: pointer;
+      transition: background-color 0.3s ease;
+    }
+
+    .btn-primary:hover {
+      background-color: var(--color-secondary);
+    }
+
+    .features {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 20px;
+      margin-top: 40px;
+      justify-content: center;
+    }
+
+    .feature {
+      background-color: var(--color-light);
+      border: 1px solid #e0e0e0;
+      border-radius: 10px;
+      padding: 20px;
+      flex: 1 1 300px;
+      text-align: center;
+      transition: transform 0.3s ease, box-shadow 0.3s ease;
+    }
+
+    .feature:hover {
+      transform: translateY(-10px);
+      box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+    }
+
+    .feature h3 {
+      margin-bottom: 15px;
+      color: var(--color-accent);
+    }
+
+    .feature p {
+      color: #666;
+    }
+
+    footer {
+      background-color: var(--color-dark);
+      color: #fff;
+      padding: 20px 0;
+    }
+
+    .footer-container {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      text-align: center;
+    }
+
+    @media (min-width: 768px) {
+      nav ul {
+        gap: 30px;
+      }
+
+      .hero h1 {
+        font-size: 4rem;
+      }
+
+      .hero p {
+        font-size: 1.5rem;
+      }
+
+      .features {
+        justify-content: space-between;
+      }
+
+      .footer-container {
+        flex-direction: row;
+        justify-content: space-between;
+        text-align: left;
+      }
+
+      .footer-container div {
+        margin: 0 20px;
+      }
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <div class="container">
+      <div class="logo">Energía Solar</div>
+      <nav>
+        <ul>
+          <li><a href="#home">Inicio</a></li>
+          <li><a href="#features">Características</a></li>
+          <li><a href="#about">Sobre Nosotros</a></li>
+          <li><a href="#contact">Contacto</a></li>
+        </ul>
+      </nav>
+    </div>
+  </header>
+
+  <main>
+    <!-- Hero Section -->
+    <section class="hero" id="home">
+      <div class="hero-content">
+        <h1>Transforma tu hogar con Energía Solar</h1>
+        <p>Instalación de paneles solares eficientes y sostenibles para un futuro más verde.</p>
+        <a href="#contact" class="btn-primary">Contáctanos</a>
+      </div>
+    </section>
+
+    <!-- Features Section -->
+    <section class="features" id="features">
+      <div class="feature">
+        <h3>Eficiencia Alta</h3>
+        <p>Nuestros paneles solares ofrecen una eficiencia superior para maximizar tu inversión.</p>
+      </div>
+      <div class="feature">
+        <h3>Durabilidad Garantizada</h3>
+        <p>Construidos para resistir las condiciones más exigentes durante años.</p>
+      </div>
+      <div class="feature">
+        <h3>Instalación Profesional</h3>
+        <p>Equipo certificado para una instalación rápida y segura.</p>
+      </div>
+      <div class="feature">
+        <h3>Soporte Continuo</h3>
+        <p>Asistencia técnica y mantenimiento para asegurar el óptimo funcionamiento.</p>
+      </div>
+    </section>
+
+    <!-- About Us Section -->
+    <section id="about" style="padding: 40px 0; background-color: var(--color-light);">
+      <div class="container">
+        <h2 style="text-align: center; margin-bottom: 20px; color: var(--color-accent);">Sobre Nosotros</h2>
+        <p style="max-width: 800px; margin: 0 auto; text-align: center; color: #555;">
+          En Energía Solar Sostenible, nos dedicamos a proporcionar soluciones energéticas limpias y eficientes. Con años de experiencia en el sector, nuestro equipo está comprometido con la calidad y la satisfacción del cliente, ofreciendo productos de primera clase y un servicio excepcional.
+        </p>
+      </div>
+    </section>
+
+    <!-- Contact Section -->
+    <section id="contact" style="padding: 40px 0;">
+      <div class="container">
+        <h2 style="text-align: center; margin-bottom: 20px; color: var(--color-accent);">Contacto</h2>
+        <form style="max-width: 600px; margin: 0 auto;">
+          <div style="margin-bottom: 15px;">
+            <label for="name" style="display: block; margin-bottom: 5px; color: #333;">Nombre</label>
+            <input type="text" id="name" name="name" required style="width: 100%; padding: 10px; border: 1px solid #ccc; border-radius: 5px;">
+          </div>
+          <div style="margin-bottom: 15px;">
+            <label for="email" style="display: block; margin-bottom: 5px; color: #333;">Correo Electrónico</label>
+            <input type="email" id="email" name="email" required style="width: 100%; padding: 10px; border: 1px solid #ccc; border-radius: 5px;">
+          </div>
+          <div style="margin-bottom: 15px;">
+            <label for="message" style="display: block; margin-bottom: 5px; color: #333;">Mensaje</label>
+            <textarea id="message" name="message" rows="5" required style="width: 100%; padding: 10px; border: 1px solid #ccc; border-radius: 5px;"></textarea>
+          </div>
+          <div style="text-align: center;">
+            <button type="submit" class="btn-primary">Enviar Mensaje</button>
+          </div>
+        </form>
+      </div>
+    </section>
+  </main>
+
+  <footer>
+    <div class="footer-container">
+      <div>
+        <h3>Energía Solar Sostenible</h3>
+        <p>© {new Date().getFullYear()} Todos los derechos reservados.</p>
+      </div>
+      <div>
+        <h4>Contacto</h4>
+        <p>Email: <a href="mailto:contacto@energiasolarsostenible.com">contacto@energiasolarsostenible.com</a></p>
+        <p>Teléfono: +34 123 456 789</p>
+      </div>
+      <div>
+        <h4>Síguenos</h4>
+        <p>
+          <a href="#">Facebook</a> | <a href="#">Twitter</a> | <a href="#">Instagram</a>
+        </p>
+      </div>
+    </div>
+  </footer>
+</body>
 </html>
